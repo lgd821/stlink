@@ -566,6 +566,21 @@ static const struct stlink_chipid_params devices[] = {
         .flags = CHIP_F_HAS_SWO_TRACING,
     },
     {
+        // STM32L4PX
+        // From RM0432.pdf - Rev. 8 and DS12903.pdf - Rev 3
+        .chip_id = STLINK_CHIPID_STM32_L4PX,
+        .description = "L4Px",
+        .flash_type = STLINK_FLASH_TYPE_L4,
+        .flash_size_reg =
+            0x1fff75e0, // "Flash size data register" (RM0432: sec 58.2, page 2274)
+        .flash_pagesize = 0x1000, // 4k, DS12903: section 3.4.1, pg 20
+        .sram_size =
+            0x50000, // 128k (SRAM1) + 64k (SRAM2) + 128k (SRAM3) = 320k, or 0x50000
+        .bootrom_base = 0x1fff0000, // RM0432: 2.2.2, pg 94
+        .bootrom_size = 0x7000, // 28k (per bank), same source as base (pg 94)
+        .flags = CHIP_F_HAS_SWO_TRACING,
+    },
+    {
         // STLINK_CHIPID_STM32_L41X
         // From RM0394 Rev 4 and DS12469 Rev 5
         .chip_id = STLINK_CHIPID_STM32_L41X,
